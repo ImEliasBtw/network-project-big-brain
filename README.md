@@ -72,6 +72,23 @@ Mascara universal: `255.255.255.224` (`/27`). Red base del laboratorio:
 
 1. IP estatica → 2. DHCP → 3. DNS → 4. Web → 5. FTP → 6. SMTP.
 
+## Verificacion (opcional)
+
+Tras configurar el servidor puedes comprobar que todo quedo bien con el script de
+solo lectura `tools/verificar.sh`. **No instala ni modifica nada**: solo consulta
+el estado actual y reporta OK/FALLA por servicio.
+
+```bash
+chmod +x tools/verificar.sh
+./tools/verificar.sh 3        # tu numero de grupo
+./tools/verificar.sh          # sin argumento: intenta autodetectar por la IP
+```
+
+Comprueba IP estatica, DHCP, DNS (directo, inverso, MX), Web, FTP y SMTP. Devuelve
+codigo de salida 0 si todo pasa y 1 si algo falla, asi que sirve tambien para una
+revision rapida el dia de la defensa. Requiere `dig`/`nslookup` y `curl` (vienen
+con los servicios instalados); si faltan, esos chequeos se omiten con aviso.
+
 ## Coordinacion entre grupos
 
 El DNS de todos los grupos debe estar activo para la defensa (pruebas cruzadas).
