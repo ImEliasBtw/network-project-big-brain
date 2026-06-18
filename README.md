@@ -6,11 +6,15 @@ Computadoras. Seccion 5TX — UNI.
 Cada grupo configura un servidor Linux con DHCP, DNS, Web, FTP y SMTP usando un
 agente LLM que lee las instrucciones de este repositorio.
 
+Funciona con **OpenClaw** (lee `AGENTS.md`) y con **Claude Code** (lee
+`CLAUDE.md`). Ambos comparten el mismo contenido: `CLAUDE.md` importa `AGENTS.md`.
+
 ## Estructura
 
 ```
 .
-├── AGENTS.md            ← El agente lo lee primero al iniciar sesion
+├── AGENTS.md            ← Contexto para OpenClaw (fuente de verdad de las reglas)
+├── CLAUDE.md            ← Contexto para Claude Code (importa AGENTS.md + notas propias)
 ├── README.md            ← Este archivo (instrucciones para humanos)
 ├── grupos/              ← Instrucciones completas y autocontenidas por grupo
 │   ├── grupo-01.md ... grupo-08.md
@@ -22,22 +26,31 @@ agente LLM que lee las instrucciones de este repositorio.
 
 ## Como usar este repo (para cada grupo)
 
-### 1. Clonar
+### 1. Clonar (igual para ambos agentes)
 
 ```bash
 git clone https://github.com/ImEliasBtw/network-project-big-brain.git
+cd network-project-big-brain
 ```
 
-### 2. Abrir el agente y apuntarlo al repo
+### 2a. Con OpenClaw
 
-El agente leera `AGENTS.md` automaticamente al iniciar.
+Abre OpenClaw apuntando al repo. Leera `AGENTS.md` automaticamente al iniciar.
+
+### 2b. Con Claude Code
+
+Dentro de la carpeta del repo, ejecuta `claude`. Leera `CLAUDE.md` (que importa
+`AGENTS.md`) automaticamente. Ojo: la configuracion usa `sudo` y modifica el
+sistema; aprueba los comandos o usa un modo de auto-aceptacion **solo en la VM
+del laboratorio**. Ver detalles en `CLAUDE.md`.
 
 ### 3. Decirle al agente tu grupo
 
 > "Soy del Grupo 3. Mi servidor tiene Ubuntu Server 22.04. La interfaz de red es
 > ens33. Configura mi servidor."
 
-El agente lee `grupos/grupo-03.md` y ejecuta todo paso a paso.
+El agente (OpenClaw o Claude Code) lee `grupos/grupo-03.md` y ejecuta todo paso a
+paso.
 
 ## Grupos y direcciones
 
